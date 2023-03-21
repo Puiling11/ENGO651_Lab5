@@ -1,3 +1,11 @@
+@media screen and (max-width: 481px){
+    #header {
+    background-color: rgb(8, 72, 90);
+    height: 80px;
+    width: 480px;
+}
+}
+
 body {
     background-color: rgb(129, 218, 188);
 }
