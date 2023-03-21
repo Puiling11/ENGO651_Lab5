@@ -42,7 +42,7 @@
 	            document.getElementById("messages").innerHTML="Connection Lost";
 	            connected_flag=0;
                 if(disconnected_flag==0)  {
-                    document.getElementById("messages").innerHTML="Connection Lost- Retrying";
+                    document.getElementById("messages").innerHTML="Connection Lost - Retrying";
                     setTimeout(MQTTconnect, reconnectTimeout);
                 }
 
@@ -75,29 +75,18 @@
 	        }
 	        
             function onConnect() {
-	        // Once a connection has been made, make a subscription and send a message.
 	            document.getElementById("messages").innerHTML="Connected to "+host+"on port "+port;
 	            connected_flag=1;
                 document.getElementById("status").innerHTML="Connected";
                 console.log("on Connect "+connected_flag);
-	            //mqtt.subscribe("sensor1");
-	            //message = new Paho.MQTT.Message("Hello World");
-	            //message.destinationName = "sensor1";
-	            //mqtt.send(message);
 	        }
 
             function disconnect() {
-                disconnected_flag=1;
                 if (connected_flag==1)
                     mqtt.disconnect();
-                    document.getElementById('server-id').disabled=false;
-                    document.getElementById('port-id').disabled=false;
             }
 
             function MQTTconnect() {
-                disconnected_flag=0;;
-                document.getElementById('server-id').disabled=true;
-                document.getElementById('port-id').disabled=true;
                 document.getElementById("messages").innerHTML="";
                 var s=document.forms["connform"]["server"].value;
                 var p=document.forms["connform"]["port"].value;
@@ -114,7 +103,6 @@
                 var x=Math.floor(Math.random() * 10000); 
                 var cname="orderform-"+x;
                 mqtt=new Paho.MQTT.Client(host, port, cname);
-                //document.write("connecting to "+ host);
                 var options={
                     useSSL: true,
                     timeout: 30,
@@ -125,7 +113,6 @@
 	
             mqtt.onConnectionLost=onConnectionLost;
             mqtt.onMessageArrived=onMessageArrived;
-		    //mqtt.onConnected = onConnected;
 
 	        mqtt.connect(options);
 	        return false;
@@ -184,7 +171,6 @@
                     location.textContent=`Latitude: ${latitude} °, Longitude: ${longitude} ° - Temperture: ${temperture} °C`;
             
                     pinLocation(latitude, longitude, temperture);
-           
             
                     if (connected_flag==0) {
                         out_msg="<b>Not Connected so can't send</b>"
@@ -241,26 +227,31 @@
     </head>
 
     <body>
-
+        
+        <div class="container-fluid">
+            
         <!--Define heading-->
         <div id="header">
             <h1>Websockets Using JavaScript MQTT Client</h1>
         </div>
         
         <script type="text/javascript"></script>
-                            
+
+        <!--Connect to MQTT-->                    
         <script>
             var connected_flag=0	
             var mqtt;
             var reconnectTimeout=2000;
         </script>
-           
+
+        <!--Display connection status-->   
         <div class="text-center py-2" id="status">Connection Status: Not Connected</div>
             
         <div class="container d-flex justify-content-center text-center" id="form-container">
             <div class="row main">
                 <div class="main-login main-center">
 
+                <!--Input server and host name-->
                 <form name="connform" action="" onsubmit="return MQTTconnect()">
                     <div class="form-group">
                         <label for="name" class="cols-sm-2 control-label">Server:</label>
@@ -279,6 +270,7 @@
                 </form>
                 <hr>
                 
+                <!--Input subscribe topic-->
                 <form name="subs" action="" onsubmit="return sub_topics()">
                     <div class="form-group">
                         <label for="name" class="cols-sm-2 control-label">Subscribe Topic:</label>
@@ -286,10 +278,11 @@
                                 <input class="form-control" type="text" name="Stopic">
                             </div>
                     </div>
-                    <input class="form-control btn btn-secondary" id="btn-style" type="submit" value="Subscribe">
+                    <input class="form-control btn btn-primary" id="btn-style" type="submit" value="Subscribe">
                 </form> 
                 <hr>
 
+                <!--Input and publish message-->
                 <form name="smessage" action="" onsubmit="return send_message()">
                     <div class="form-group">
                         <label for="name" class="cols-sm-2 control-label">Message:</label>
@@ -303,7 +296,7 @@
                                 <input class="form-control" type="text" name="Ptopic">
                             </div>
                     </div> 
-                    <input class="form-control btn btn-secondary" id="btn-style" type="submit" value="Submit">
+                    <input class="form-control btn btn-primary" id="btn-style" type="submit" value="Submit">
                 </form>
 
                 </div>
@@ -311,11 +304,13 @@
         </div>
         <br>  
 
+        <!--Display message from server-->
         <div class="container d-flex justify-content-center text-center" id="msg-container">
-            Messages:<p id="messages"></p>
+            Messages: &nbsp;<p id="messages"></p>
         </div>
         <br>
-            
+        
+        <!--Get and publish current location-->
         <div class="container text-center">
             <div class="text-center py-2" id="publish-loc">Publish your location</div>
 
@@ -323,19 +318,21 @@
             <p id="loc-status"></p>
             <p id="location"></p>
             
+            <!--Send location on click-->
             <script>
                 const find = document.querySelector('#find-me');
                 if(find){
                     find.addEventListener('click', send_location);
                 }
             </script>
-        
+
+            <!--Define map container-->
             <div id="mapid"></div>
         
             <script src="map.js"></script>
         </div>
 
-
+        </div>
         <script>
             MQTTconnect();
         </script>
