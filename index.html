@@ -199,7 +199,7 @@
                     var msg=JSON.stringify(geojson);
                     console.log(msg);
 
-                    var topic="651/Pui Ling IP/my_temperature";
+                    var topic="651/Pui_Ling_IP/my_temperature";
                     message=new Paho.MQTT.Message(msg);
                     if (topic=="")
                         message.destinationName="test-topic"
