@@ -4,7 +4,7 @@ body {
 #header {
     background-color: rgb(8, 72, 90);
     height: 80px;
-    width: 1264px;
+    width: 100%;
 }
 h1 {
     color: white;
@@ -20,7 +20,7 @@ h1 {
 }
 #form-container {
     background-color: white;
-    width: 500px;
+    width: 100%;
     padding: 20px;
     border-radius: 8px;
     opacity: 90%;
@@ -35,7 +35,7 @@ label {
 }
 #msg-container {
     background-color: blanchedalmond;
-    width: 500px;
+    width: 100%;
     padding: 10px;
     border-radius: 8px;
     opacity: 80%;
