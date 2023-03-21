@@ -1,26 +1,26 @@
-@media screen and (max-width: 481px){
+@media screen and (max-width: 360px){
     #header {
     background-color: rgb(8, 72, 90);
     height: 80px;
-    width: 480px;
+    width: 360px;
 }
     #form-container {
     background-color: white;
-    width: 480px;
+    width: 360px;
     padding: 20px;
     border-radius: 8px;
     opacity: 90%;
 }
     #msg-container {
     background-color: blanchedalmond;
-    width: 480px;
+    width: 360px;
     padding: 10px;
     border-radius: 8px;
     opacity: 80%;
 } 
     #mapid { 
     height: 500px;
-    width: 480px;
+    width: 360px;
     margin: auto;
     margin-bottom: 10px;
 }
