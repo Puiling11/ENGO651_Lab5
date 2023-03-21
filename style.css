@@ -4,7 +4,7 @@ body {
 #header {
     background-color: rgb(8, 72, 90);
     height: 80px;
-    width: 1280px;
+    width: 1264px;
 }
 h1 {
     color: white;
@@ -47,7 +47,7 @@ label {
 }
 #mapid { 
     height: 500px;
-    width: 800px;
+    width: 100%;
     margin: auto;
     margin-bottom: 10px;
 }
