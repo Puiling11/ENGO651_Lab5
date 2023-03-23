@@ -9,8 +9,10 @@ L.tileLayer('https://api.mapbox.com/styles/v1/puiling11/clf8xcwjb000001mlrdb8c00
     accessToken: 'pk.eyJ1IjoicHVpbGluZzExIiwiYSI6ImNsZjBkNmllaDAwb3gzcHFqMGdocW5laXUifQ.gd31QkMQxymb2LQ5KR8bOw'
 }).addTo(mymap)
 
-function pinLocation(lat,long,temp){
+// Define properties for pinning locations on map
+function pinLocation(latitude,longitude,temperature){
     
+    // Define style and color of marker based on different temperature range
     var blueIcon = new L.Icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
         shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -36,29 +38,29 @@ function pinLocation(lat,long,temp){
         shadowSize: [41, 41]
     });
 
-    if (temp<10) {
-        var marker = L.marker([lat, long], 
+    if (temperature<10) {
+        var marker = L.marker([latitude, longitude], 
             {icon: blueIcon}
             ).addTo(mymap);
-    }else if (10<=temp && temp<30){
-        var marker = L.marker([lat, long], 
+    }else if (10<=temperature && temperature<30){
+        var marker = L.marker([latitude, longitude], 
             {icon: greenIcon}
             ).addTo(mymap);
-    }else if(30<=temp){
-        var marker = L.marker([lat, long],
+    }else if(30<=temperature){
+        var marker = L.marker([latitude, longitude],
             {icon: redIcon}
             ).addTo(mymap);
     }else{
-        var marker = L.marker([lat, long]).addTo(mymap);
+        var marker = L.marker([latitude, longitude]).addTo(mymap);
     }
-    marker.bindPopup('<p>Temperture: ' + temp + '</p><p>Lat: ' + lat + '</p><p>Long: ' + long+'</p>').openPopup()
+    marker.bindPopup('Latitude: ' + latitude + '<br>' + 'Longitude: ' + longitude + '<br>' + 'Temperture: ' + temperature + '°C').openPopup()
 
 }
 
 function geoJsonLocation(myGeoJson){
     lat = myGeoJson['features'][0]['geometry']['coordinates'][0][0];
     long = myGeoJson['features'][0]['geometry']['coordinates'][0][1];
-    temp = myGeoJson['features'][0]['properties']['temp'][0][0];
+    temperature = myGeoJson['features'][0]['properties']['temperature'][0][0];
 
     var blueIcon = new L.Icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
@@ -85,21 +87,21 @@ function geoJsonLocation(myGeoJson){
         shadowSize: [41, 41]
     });
 
-    if (temp<10) {
-        var marker = L.marker([lat, long], 
+    if (temperature<10) {
+        var marker = L.marker([latitude, longitude], 
             {icon: blueIcon}
             ).addTo(mymap);
-    }else if (10<=temp && temp<30){
-        var marker = L.marker([lat, long], 
+    }else if (10<=temperature && temperature<30){
+        var marker = L.marker([latitude, longitude], 
             {icon: greenIcon}
             ).addTo(mymap);
-    }else if(30<=temp){
-        var marker = L.marker([lat, long],
+    }else if(30<=temperature){
+        var marker = L.marker([latitude, longitude],
             {icon: redIcon}
             ).addTo(mymap);
     }else{
-        var marker = L.marker([lat, long]).addTo(mymap);
+        var marker = L.marker([latitude, longitude]).addTo(mymap);
     }
-    marker.bindPopup('<p>Temperture: ' + temp + '</p><p>Lat: ' + lat + '</p><p>Long: ' + long+'</p>').openPopup()
+    marker.bindPopup('Latitude: ' + latitude + '<br>' + 'Longitude: ' + longitude + '<br>' + 'Temperture: ' + temperature + '°C').openPopup()
 
 }
