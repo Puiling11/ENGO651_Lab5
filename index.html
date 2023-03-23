@@ -115,7 +115,9 @@
                 const longitude=coordinates.coords.longitude;
 
                 status.textContent='';
-                var temperature=Math.floor(Math.random() * 101) - 40;
+                var min = Math.ceil(-40);
+                var max = Math.floor(60);
+                var temperature=Math.floor(Math.random() * (max - min) + min);
                 location.textContent=`Location: ${latitude}, ${longitude}  Temperature: ${temperature} °C`;
 
                 pinLocation(latitude, longitude, temperature);
@@ -130,13 +132,13 @@
                             "coordinates": []
                         },
                         "properties": {
-                            "temp": []
+                            "temperature": []
                         }
                     }]
                 };
 
                 geoJSON.features[0].geometry.coordinates.push([latitude, longitude]);
-                geoJSON.features[0].properties.temp.push([temperature]);
+                geoJSON.features[0].properties.temperature.push([temperature]);
                 var msg=JSON.stringify(geoJSON);
                 console.log(msg);
 
